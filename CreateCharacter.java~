@@ -1,0 +1,25 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class CreateCharacter extends JPanel{	
+	
+	public CreateCharacter(JLabel createCharLabel, JButton backToMenu){
+		this.setLayout(null);
+		
+		//Label "Create your Character:"
+		createCharLabel.setFont(new Font("Algerian", Font.BOLD,40));
+		createCharLabel.setForeground(Color.white);
+		createCharLabel.setBounds(400,100,500,60);
+
+		//"BACK TO MENU" button
+		backToMenu.setFont(new Font("Algerian", Font.BOLD,25));
+		backToMenu.setForeground(Color.white);
+		backToMenu.setBounds(50,650,250,60);
+		backToMenu.setBackground(Color.RED);
+
+
+		this.add(createCharLabel);
+		this.add(backToMenu);
+		this.setBackground(new Color(10,0,40));
+	}
+}
