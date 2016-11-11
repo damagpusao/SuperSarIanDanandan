@@ -10,7 +10,7 @@ public class ChooseTeamPanel extends JPanel{
 		//Label "Choose a Team!"
 		chooseTeamLabel.setFont(new Font("Liberation Serif", Font.BOLD,40));
 		chooseTeamLabel.setForeground(Color.white);
-		chooseTeamLabel.setBounds(450,50,600,60);
+		chooseTeamLabel.setBounds(450,30,600,60);
 
 		//Label "A             B" for teams
 		A_B.setFont(new Font("Algerian", Font.BOLD,40));
@@ -18,23 +18,23 @@ public class ChooseTeamPanel extends JPanel{
 		A_B.setBounds(325,100,600,60);
 
 		//team A
-		teamA0.setBounds(120,170, 200, 200);
+		teamA0.setBounds(120,170, 150, 150);
 		teamA0.setBackground(Color.BLACK);
-		teamA1.setBounds(350,170, 200, 200);
+		teamA1.setBounds(350,170, 150, 150);
 		teamA1.setBackground(Color.BLACK);
-		teamA2.setBounds(120,390, 200, 200);
+		teamA2.setBounds(120,330, 150, 150);
 		teamA2.setBackground(Color.BLACK);
-		teamA3.setBounds(350,390, 200, 200);
+		teamA3.setBounds(350,330, 150, 150);
 		teamA3.setBackground(Color.BLACK);
 
 		//team B
-		teamB0.setBounds(650,170, 200, 200);
+		teamB0.setBounds(650,170, 150, 150);
 		teamB0.setBackground(Color.BLACK);
-		teamB1.setBounds(880,170, 200, 200);
+		teamB1.setBounds(880,170, 150, 150);
 		teamB1.setBackground(Color.BLACK);
-		teamB2.setBounds(650,390, 200, 200);
+		teamB2.setBounds(650,330, 150, 150);
 		teamB2.setBackground(Color.BLACK);
-		teamB3.setBounds(880,390, 200, 200);
+		teamB3.setBounds(880,330, 150, 150);
 		teamB3.setBackground(Color.BLACK);
 
 		ready.setFont(new Font("Liberation Serif", Font.BOLD,25));
