@@ -5,11 +5,22 @@ public class CreateCharPanel extends JPanel{
 	JLabel nameLabel = new JLabel("Avatar Name:");	
 	JTextArea enterName = new JTextArea("Aura");
 	JPanel enterNamePanel = new JPanel();
+	JLabel createCharLabel;
+	JButton go, backToMenu;
 	
 	
 	public CreateCharPanel(JLabel createCharLabel, JButton go, JButton backToMenu){
 		this.setLayout(null);
 		
+		this.createCharLabel = createCharLabel;
+		this.go = go;
+		this.backToMenu = backToMenu;
+
+		init();
+	}
+
+	public void init(){
+
 		//Label "Create your Character:"
 		createCharLabel.setFont(new Font("Liberation Serif", Font.BOLD,40));
 		createCharLabel.setForeground(Color.white);
@@ -42,4 +53,6 @@ public class CreateCharPanel extends JPanel{
 		this.add(backToMenu);
 		this.setBackground(new Color(10,0,40));
 	}
+
+
 }

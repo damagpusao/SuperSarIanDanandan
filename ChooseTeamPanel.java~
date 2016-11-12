@@ -1,12 +1,35 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class ChooseTeamPanel extends JPanel{	
+public class ChooseTeamPanel extends JPanel{
+		JLabel chooseTeamLabel, A_B;
+	  JPanel teamA0, teamA1, teamA2, teamA3, teamB0, teamB1, teamB2, teamB3, chat;
+	  JButton backToChar, backToMenu, ready, start;
 	
-	public ChooseTeamPanel(JLabel chooseTeamLabel, JLabel A_B, JPanel teamA0, JPanel teamA1, JPanel teamA2, JPanel teamA3, JPanel teamB0, JPanel teamB1, JPanel teamB2, JPanel teamB3, JButton backToChar, JButton backToMenu, JButton ready, JButton start){
+	public ChooseTeamPanel(JLabel chooseTeamLabel, JLabel A_B, JPanel teamA0, JPanel teamA1, JPanel teamA2, JPanel teamA3, JPanel teamB0, JPanel teamB1, JPanel teamB2, JPanel teamB3, JButton backToChar, JButton backToMenu, JButton ready, JButton start, JPanel chat){
 	
 		this.setLayout(null);
-		
+
+		this.chooseTeamLabel = chooseTeamLabel;
+		this.A_B = A_B;
+	  this.teamA0 = teamA0;
+		this.teamA1 = teamA1;
+		this.teamA2 = teamA2;
+		this.teamA3 = teamA3;
+	  this.teamB0 = teamB0;
+		this.teamB1 = teamB1;
+	  this.teamB2 = teamB2;
+		this.teamB3 = teamB3;
+		this.backToChar = backToChar;
+	  this.backToMenu = backToMenu;
+		this.ready = ready;
+		this.start = start;
+		this.chat = chat;
+	
+		init();
+	}		
+	
+	public void init(){
 		//Label "Choose a Team!"
 		chooseTeamLabel.setFont(new Font("Liberation Serif", Font.BOLD,40));
 		chooseTeamLabel.setForeground(Color.white);
@@ -39,14 +62,17 @@ public class ChooseTeamPanel extends JPanel{
 
 		ready.setFont(new Font("Liberation Serif", Font.BOLD,25));
 		ready.setForeground(Color.white);
-		ready.setBounds(50,650,250,50);
+		ready.setBounds(50,500,250,50);
 		ready.setBackground(Color.RED);
 		
 		start.setFont(new Font("Liberation Serif", Font.BOLD,25));
 		start.setForeground(Color.white);
-		start.setBounds(900,650,250,50);
+		start.setBounds(900,500,250,50);
 		start.setBackground(Color.RED);
 
+		//Chat panel
+		chat.setBounds(0,620,1200,100);
+		
 		//"BACK TO MENU" button
 		backToMenu.setFont(new Font("Algerian", Font.BOLD,13));
 		backToMenu.setForeground(Color.white);
@@ -71,6 +97,7 @@ public class ChooseTeamPanel extends JPanel{
 		this.add(teamB3);
 		this.add(ready);
 		this.add(start);
+		this.add(chat);	
 		this.add(backToChar);
 		this.add(backToMenu);
 		this.setBackground(new Color(10,0,40));

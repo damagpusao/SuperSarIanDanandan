@@ -37,11 +37,13 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	JPanel teamB3 = new JPanel();
 	JButton ready = new JButton("READY!");
 	JButton start = new JButton("START");
-	ChooseTeamPanel pickTeam = new ChooseTeamPanel(chooseTeamLabel, A_B, teamA0, teamA1, teamA2, teamA3, teamB0, teamB1, teamB2, teamB3, backToChar, backToMenu3, ready, start);
+	JPanel chat1 = new JPanel();
+	ChooseTeamPanel pickTeam = new ChooseTeamPanel(chooseTeamLabel, A_B, teamA0, teamA1, teamA2, teamA3, teamB0, teamB1, teamB2, teamB3, backToChar, backToMenu3, ready, start, chat1);
 
 	//Game Start Page
 	JButton quit = new JButton("QUIT");
-	GameStartPanel gameStart = new GameStartPanel(quit);
+	JPanel chat2 = new JPanel();
+	GameStartPanel gameStart = new GameStartPanel(quit, chat2);
 
 	public BummRoyale(){
 	
