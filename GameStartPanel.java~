@@ -26,13 +26,11 @@ public class GameStartPanel extends JPanel{
 		//Chat panel
 		chat.setBounds(0,620,1200,100);
 
-		//creates the panel containing the avatar
 		CharPanel charPanel = new CharPanel();
 		charPanel.setLocation(500,500);
 		charPanel.setSize(80,70);
 		charPanel.setOpaque(false); // comment out to make visible
 
-		//adds action to the panel containing the avatar
 		MoveAvatars animation = new MoveAvatars(charPanel, 24);
 		animation.addAction("LEFT", -3,  0);
 		animation.addAction("RIGHT", 3,  0);
