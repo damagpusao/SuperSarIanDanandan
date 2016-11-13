@@ -3,15 +3,14 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class GameStartPanel extends JPanel{	
-	Image image = Toolkit.getDefaultToolkit().getImage("image.png");
-	Image fish = Toolkit.getDefaultToolkit().getImage("fish.png");
+	Image map = Toolkit.getDefaultToolkit().getImage("image.png");
 	int x=200, y=200;
 	JButton quit;
 	JPanel chat;
+	ImageIcon image2 = new ImageIcon(this.getClass().getResource("fish.png"));
 
 	public GameStartPanel(JButton quit, JPanel chat){
 		this.setLayout(null);
-
 		this.quit = quit;
 		this.chat = chat;
 
@@ -27,19 +26,29 @@ public class GameStartPanel extends JPanel{
 		//Chat panel
 		chat.setBounds(0,620,1200,100);
 
-		this.add(quit);
-		this.add(chat);
+		CharPanel charPanel = new CharPanel();
+		charPanel.setLocation(500,500);
+		charPanel.setSize(80,70);
+		charPanel.setOpaque(false); // comment out to make visible
 
+		MoveAvatars animation = new MoveAvatars(charPanel, 24);
+		animation.addAction("LEFT", -3,  0);
+		animation.addAction("RIGHT", 3,  0);
+		animation.addAction("UP",    0, -3);
+		animation.addAction("DOWN",  0,  3);
+
+		this.add(quit);
+		this.add(charPanel);
+		this.add(chat);
 		this.setBackground(new Color(10,0,40));
 	}
-
 
 	public void paintComponent(Graphics g){
 	
 		super.paintComponent(g);
 		
-		g.drawImage(image,0,0,this); //draws the image "welcome.jpg"
-		g.drawImage(fish, x,y,this);
+		//draws the map
+		g.drawImage(map,0,0,this);
 	}
 
 
