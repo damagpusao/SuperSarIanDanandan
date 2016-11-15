@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class GameStartPanel extends JPanel{	
-	Image map = Toolkit.getDefaultToolkit().getImage("images/image.png");
+	Image map = Toolkit.getDefaultToolkit().getImage("images/bg.jpg");
 	int x=200, y=200;
 	JButton quit;
 	JPanel chat;
@@ -23,7 +23,7 @@ public class GameStartPanel extends JPanel{
 		quit.setBackground(Color.RED);
 
 		//Chat panel
-		chat.setBounds(0,620,1200,100);
+		chat.setBounds(0,700,1200,100);
 		//temporary
 
 		

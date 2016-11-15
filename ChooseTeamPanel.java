@@ -71,7 +71,7 @@ public class ChooseTeamPanel extends JPanel{
 		start.setBackground(Color.RED);
 
 		//Chat panel
-		chat.setBounds(0,620,1200,100);
+		chat.setBounds(0,700,1200,100);
 		
 		//"BACK TO MENU" button
 		backToMenu.setFont(new Font("Algerian", Font.BOLD,13));
