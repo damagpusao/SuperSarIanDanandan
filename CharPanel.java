@@ -32,7 +32,7 @@ public class CharPanel extends JPanel {
 			numFrames = imgFileNames.length;
 			imgs = new ImageIcon[numFrames];  // allocate the array
 			URL imgUrl = null;
-			for (int i = 0; i < numFrames; ++i) {
+			for (int i = 0; i < numFrames; i++) {
 				imgUrl = this.getClass().getClassLoader().getResource(imgFileNames[i]);
 				if (imgUrl == null) {
 					System.err.println("Couldn't find file: " + imgFileNames[i]);
@@ -64,9 +64,9 @@ public class CharPanel extends JPanel {
 			walkingAnimation.start();  // start the thread to run animation
 		}
 
-		public void flipImage() {
-			if(isFlip == false) isFlip = true;
-			else isFlip = false;
+		public void flipImage(boolean condition) {
+			 this.isFlip = condition;
+			
 		}
 
 		public void startAnimation() {
@@ -89,6 +89,7 @@ public class CharPanel extends JPanel {
 		//draws the avatar to the panel
 		public void paintComponent(Graphics g) { // **
 			super.paintComponent(g);
+			  if(currentFrame >= numFrames) currentFrame = 0; 
 			  Image currImg = imgs[currentFrame].getImage();
     		  Graphics2D g2d = (Graphics2D) g;
 			  
@@ -99,6 +100,10 @@ public class CharPanel extends JPanel {
 			  0, 0, currImg.getWidth(this), currImg.getHeight(this),this);
 
 			
+		}
+
+		public Character getCharacter() {
+			return this.character;
 		}
 
 	}

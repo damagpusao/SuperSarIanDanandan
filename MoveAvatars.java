@@ -12,6 +12,7 @@ import java.net.*;
 import java.util.Map;
 import java.util.HashMap;
 import javax.swing.*;
+import java.awt.Point;
 
 public class MoveAvatars implements ActionListener
 {
@@ -76,13 +77,16 @@ public class MoveAvatars implements ActionListener
 		//  Start the Timer when the first key is pressed
    	if (pressedKeys.size() == 1){
    		timer.start();
-		if(key != previousKey && previousKey != "") { // change direction of UI  **
-			CharPanel cpanel = (CharPanel) component;
-			cpanel.flipImage();
+		CharPanel cpanel = (CharPanel) component;
+		if(key.equals("LEFT")) { // change direction of UI  **
+			cpanel.flipImage(true);
+		}
+		else if(key.equals("RIGHT")){
+			cpanel.flipImage(false);
 		}
 
 		previousKey = key; // stores current key as previous key **
-		CharPanel cpanel = (CharPanel) component; // starts animation of the character **
+	
 		cpanel.startAnimation(); // **
 		}
 
@@ -133,7 +137,9 @@ public class MoveAvatars implements ActionListener
 		}
 
 		//  Move the component
+		CharPanel cpanel = (CharPanel) component;
 		component.setLocation(nextX, nextY);
+		cpanel.getCharacter().setPos(nextX, nextY);
 	}
 
 	//  Action to keep track of the key and a Point to represent the movement

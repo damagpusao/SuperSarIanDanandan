@@ -14,4 +14,8 @@ public class Weapon {
     public void setOwner(Character owner) {
         this.owner = owner;
     }
+
+    public int getPower() {
+        return this.power;
+    }
 }
