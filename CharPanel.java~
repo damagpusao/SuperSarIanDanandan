@@ -7,7 +7,7 @@ public class CharPanel extends JPanel {
 		ImageIcon img;	
 
 		public CharPanel(){
-			this.img = new ImageIcon(this.getClass().getResource("fish.png"));
+			this.img = new ImageIcon(this.getClass().getResource("pacman_2.png"));
 
 		}
 		

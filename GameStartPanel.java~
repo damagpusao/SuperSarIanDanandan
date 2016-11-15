@@ -7,7 +7,7 @@ public class GameStartPanel extends JPanel{
 	int x=200, y=200;
 	JButton quit;
 	JPanel chat;
-	ImageIcon image2 = new ImageIcon(this.getClass().getResource("fish.png"));
+	ImageIcon image2 = new ImageIcon(this.getClass().getResource("pacman_2.png"));
 
 	public GameStartPanel(JButton quit, JPanel chat){
 		this.setLayout(null);

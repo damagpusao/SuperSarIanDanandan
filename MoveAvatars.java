@@ -21,6 +21,7 @@ public class MoveAvatars implements ActionListener
 	private JComponent component;
 	private Timer timer;
 	private Map<String, Point> pressedKeys = new HashMap<String, Point>();
+	private String previousKey = "";
 
 	public MoveAvatars(JComponent component, int delay)
 	{
@@ -64,6 +65,7 @@ public class MoveAvatars implements ActionListener
 	//  Invoked whenever a key is pressed or released
 	private void handleKeyEvent(String key, Point moveDelta)
 	{
+		
 		//  Keep track of which keys are pressed
 		if (moveDelta == null){
 			pressedKeys.remove( key );
@@ -74,11 +76,21 @@ public class MoveAvatars implements ActionListener
 		//  Start the Timer when the first key is pressed
    	if (pressedKeys.size() == 1){
    		timer.start();
+		if(key != previousKey && previousKey != "") { // change direction of UI  **
+			CharPanel cpanel = (CharPanel) component;
+			cpanel.flipImage();
+		}
+
+		previousKey = key; // stores current key as previous key **
+		CharPanel cpanel = (CharPanel) component; // starts animation of the character **
+		cpanel.startAnimation(); // **
 		}
 
 		//  Stop the Timer when all keys have been released
    	if (pressedKeys.size() == 0){
-  			timer.stop();
+  		 timer.stop();
+		 CharPanel cpanel = (CharPanel) component; // stops animation of the character **
+		 cpanel.stopAnimation(); // **
 		}
 	}
 
@@ -95,7 +107,7 @@ public class MoveAvatars implements ActionListener
 
 		Dimension parentSize = component.getParent().getSize();
 		int parentWidth  = parentSize.width;
-		int parentHeight = parentSize.height;
+		int parentHeight = 620;
 
 		//  Calculate new move
 		int deltaX = 0;

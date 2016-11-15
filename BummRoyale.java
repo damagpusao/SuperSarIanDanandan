@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	
+
 	//First panel to show (Title Page)
 	JLabel title = new JLabel("BUMM! Royale");
 	JButton howToPlay	= new JButton("HOW TO PLAY");
@@ -45,8 +46,9 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	JPanel chat2 = new JPanel();
 	GameStartPanel gameStart = new GameStartPanel(quit, chat2);
 
+
+	Character character;
 	public BummRoyale(){
-	
 		//sets main frame to menu
 		setContentPane(mainMenu);
 
@@ -85,12 +87,15 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 		}else if (e.getSource() == go){
 			setContentPane(pickTeam);
 		}else if (e.getSource() == start){
+			gameStart.setCharacter(createChar.getCharacter());
 			setContentPane(gameStart);
 		}else if (e.getSource() == backToChar){
 			setContentPane(createChar);
 		}
 		setVisible(true);
 	}
+
+
 	
 	//for MouseListener
 	public void mouseClicked(MouseEvent e){}
