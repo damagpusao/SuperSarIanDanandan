@@ -39,7 +39,7 @@ public class CreateCharPanel extends JPanel{
 
 		go.setFont(new Font("Liberation Serif", Font.BOLD,25));
 		go.setForeground(Color.white);
-		go.setBounds(900,650,250,50);
+		go.setBounds(900,600,250,50);
 		go.setBackground(Color.RED);
 
     ActionListener al = new ActionListener()
@@ -130,8 +130,8 @@ public class CreateCharPanel extends JPanel{
 			System.out.println("char4");
 			imgs = new String[] {"images/g_green-1.png","images/g_green-2.png"};
 		}
-
-		this.character = new Character(imgs);
+		if(enterName.getText() != "")
+			this.character = new Character(enterName.getText(), imgs);
 	}
 
 	public Character getCharacter() {

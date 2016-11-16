@@ -3,35 +3,31 @@ import java.net.Socket;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.PrintStream;
+import java.io.IOException;
+import java.awt.event.*;
 
 
-public class TCPClient extends Thread implements MessageDetector{
+public class TCPClient extends Thread implements MessageDetector,ActionListener{
 	private String name;
-	public static void main (String [] args) throws Exception {
-		TCPClient myClient = new TCPClient();
-		myClient.start();
+	private String serverIP;
+	private boolean isRunning;
+	private Socket SOCK;
+	private ThreadSocket threadsocket;
+	private ChatGUI chatGUI;
+	public TCPClient (String name, String serverIP) {
+		this.name = name;
 	}
+
 	
 	public void run() {
+		isRunning = true;
 		try{
-			BufferedReader user = new BufferedReader(new InputStreamReader(System.in)); // scanf
-			String mymessage = "";
-			System.out.print("Enter your name:");
-			name = user.readLine();
-			System.out.print("Enter IP Address of Server:");
-			String ip = user.readLine();
-			Socket SOCK = new Socket(ip,102);
+		    SOCK = new Socket(serverIP,102);
 
-			ThreadSocket threadsocket = new ThreadSocket(SOCK,this);
+		    threadsocket = new ThreadSocket(SOCK,this);
 			threadsocket.start();
 
-			while(true){		
-				System.out.println();
-				System.out.print(name + ":");
-				String message = user.readLine(); //scanf
-
-				threadsocket.sendMessage(name + ":" + message);
-				
+			while(isRunning){		
 			}
 
 		}
@@ -42,10 +38,33 @@ public class TCPClient extends Thread implements MessageDetector{
 		
 	} //end of run()
 
+	public void stopClient() {
+		isRunning = false;
+		threadsocket.stopThreadSocket();
+		try {
+			SOCK.close();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void addGUI(ChatGUI chatGUI){
+		this.chatGUI = chatGUI;
+	} 
+
 	public void receivedMessage (ThreadSocket ts, String msg) {
-		System.out.println();
-		System.out.println("****** "+msg);
-		System.out.print( name+":");
+		this.chatGUI.addMessage(msg);
+	}
+
+	public void onDisconnected(ThreadSocket ts){
+		System.out.println("disconnected");
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		threadsocket.sendMessage(name + ":" + this.chatGUI.getMessage());
+		this.chatGUI.clearInput();
 	}
 
 }

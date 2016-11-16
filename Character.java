@@ -9,9 +9,10 @@ public class Character {
     private Weapon weapon;
     private int team;
     private boolean is_died;
+    private String name;
 
-    public Character(String[] img_frames) {
-
+    public Character(String name,String[] img_frames) {
+        this.name = name;
         this.is_died = false;
         this.hp = 1000;
         this.image_frames = img_frames;
@@ -27,7 +28,6 @@ public class Character {
     }
 
     public int attack(double velocity, double angle, int targetX ) {
-
         double range = (((velocity) * (velocity) ) * Math.sin(angle) )/9.8;
         int rangeInt = (int)Math.round(range) + this.xPos;
         if(rangeInt >= targetX - 38 && rangeInt <= targetX + 38) {
@@ -42,6 +42,10 @@ public class Character {
     
     public String[] getImages() {
         return this.image_frames;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
 
