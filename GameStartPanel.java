@@ -2,46 +2,46 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class GameStartPanel extends JPanel implements KeyListener{	
-	Image map = Toolkit.getDefaultToolkit().getImage("images/bg.jpg");
+public class GameStartPanel extends JPanel{	
+	Image map = Toolkit.getDefaultToolkit().getImage("image.png");
 	int x=200, y=200;
 	JButton quit;
-	Character character;
-	CharPanel charPanel;
-//	BummRoyalGame game;
-	public GameStartPanel(JButton quit){
-	//	this.character = new Character(new String[]{"images/b_orange-1.png","images/b_orange-2.png"}); //default character
+	JPanel chat;
+	ImageIcon image2 = new ImageIcon(this.getClass().getResource("fish.png"));
+
+	public GameStartPanel(JButton quit, JPanel chat){
 		this.setLayout(null);
 		this.quit = quit;
+		this.chat = chat;
 
+		init();
 	}
 
 	public void init(){
 		quit.setFont(new Font("Algerian", Font.BOLD,13));
 		quit.setForeground(Color.white);
 		quit.setBounds(10,10,100,30);
-		quit.setBackground(Color.RED);		
+		quit.setBackground(Color.RED);
+
+		//Chat panel
+		chat.setBounds(0,620,1200,100);
 
 		//creates the panel containing the avatar
-	    charPanel = new CharPanel(this.character);
+		CharPanel charPanel = new CharPanel();
 		charPanel.setLocation(500,500);
 		charPanel.setSize(80,70);
 		charPanel.setOpaque(false); // comment out to make visible
 
 		//adds action to the panel containing the avatar
 		MoveAvatars animation = new MoveAvatars(charPanel, 24);
-		animation.addAction("LEFT", -1,  0);
-		animation.addAction("RIGHT", 1,  0);
-		//animation.addAction("UP",    0, -1);
-		//animation.addAction("DOWN",  0,  1);
-
-		JPanel controlsPane = new JPanel();
-		controlsPane.setLayout(new FlowLayout());
-		JTextField powerField = new JTextField();
-		JTextField angle = new  JTextField();
+		animation.addAction("LEFT", -3,  0);
+		animation.addAction("RIGHT", 3,  0);
+		animation.addAction("UP",    0, -3);
+		animation.addAction("DOWN",  0,  3);
 
 		this.add(quit);
 		this.add(charPanel);
+		this.add(chat);
 		this.setBackground(new Color(10,0,40));
 	}
 
@@ -53,35 +53,5 @@ public class GameStartPanel extends JPanel implements KeyListener{
 		g.drawImage(map,0,0,this);
 	}
 
-	public void setCharacter(Character c) {
-		this.character = c;
-		if(charPanel != null ) this.remove(charPanel);
-		init();
-
-	}
-
-	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		switch( keyCode ) { 
-			case KeyEvent.VK_UP:
-				// handle up 
-				break;
-			case KeyEvent.VK_DOWN:
-				// handle down 
-				break;
-		}
-	}
-
-	public void keyReleased(KeyEvent e) {
-		
-	}
-
-	public void keyTyped(KeyEvent e) {
-		
-	}
-
-//	public void addGame(BummRoyalGame game) {
-//		this.game = game;
-//	} 
 
 }

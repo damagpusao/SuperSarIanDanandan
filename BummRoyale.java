@@ -4,7 +4,6 @@ import java.awt.event.*;
 
 public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	
-
 	//First panel to show (Title Page)
 	JLabel title = new JLabel("BUMM! Royale");
 	JButton howToPlay	= new JButton("HOW TO PLAY");
@@ -38,22 +37,17 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	JPanel teamB3 = new JPanel();
 	JButton ready = new JButton("READY!");
 	JButton start = new JButton("START");
-	ChatGUI chat1 = new ChatGUI();
-	TCPClient chatClient;
-	
-	JPanel lobbyPanel = new JPanel();
-	String ipaddress;
-	ChooseTeamPanel pickTeam = new ChooseTeamPanel(chooseTeamLabel, A_B, teamA0, teamA1, teamA2, teamA3, teamB0, teamB1, teamB2, teamB3, backToChar, backToMenu3, ready, start);
+	JPanel chat1 = new JPanel();
+	ChooseTeamPanel pickTeam = new ChooseTeamPanel(chooseTeamLabel, A_B, teamA0, teamA1, teamA2, teamA3, teamB0, teamB1, teamB2, teamB3, backToChar, backToMenu3, ready, start, chat1);
 
 	//Game Start Page
 	JButton quit = new JButton("QUIT");
-	GameStartPanel gameStart = new GameStartPanel(quit);
+	JPanel chat2 = new JPanel();
+	GameStartPanel gameStart = new GameStartPanel(quit, chat2);
 
-
-	Character character;
-	public BummRoyale(String ipaddress){
+	public BummRoyale(){
+	
 		//sets main frame to menu
-		this.ipaddress = ipaddress;
 		setContentPane(mainMenu);
 
 		howToPlay.addActionListener(this);
@@ -67,20 +61,17 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 		start.addActionListener(this);
 		quit.addActionListener(this);
 
-		
 		//specifications for window
 		Toolkit kit = Toolkit.getDefaultToolkit(); 
 		Dimension screenSize = kit.getScreenSize(); //gets the screensize
 		int screenHeight = screenSize.height; //gets the screen height
 		int screenWidth = screenSize.width; //gets the screen width
 		
-		setBounds(0,0,1200,700);
+		setBounds(0,0,1200,800);
 		//setBounds(screenWidth/6,screenHeight/16,1200,800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
-
-		
 	}
 	
 	//for ActionListener
@@ -89,35 +80,17 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 			setContentPane(howToFrame);
 		}else if (e.getSource() == play || e.getSource() == proceed){
 			setContentPane(createChar);
-		}else if (e.getSource() == backToMenu1 || e.getSource() == backToMenu2 || e.getSource() == backToMenu3 ){
+		}else if (e.getSource() == backToMenu1 || e.getSource() == backToMenu2 || e.getSource() == backToMenu3 || e.getSource() == quit){
 			setContentPane(mainMenu);
-		}else if (e.getSource() == go){	
-			this.chatClient = new TCPClient(createChar.getCharacter().getName(),ipaddress);
-			chatClient.addGUI(chat1);
-			chat1.addClient(chatClient);
-			chatClient.start();
-			lobbyPanel.setLayout(new BorderLayout());
-			lobbyPanel.add(pickTeam,BorderLayout.CENTER);
-			lobbyPanel.add(chat1, BorderLayout.PAGE_END);
-			setContentPane(lobbyPanel);
+		}else if (e.getSource() == go){
+			setContentPane(pickTeam);
 		}else if (e.getSource() == start){
-			JPanel mainGame = new JPanel();
-			gameStart.setCharacter(createChar.getCharacter());
-			mainGame.setLayout(new BorderLayout());
-			mainGame.add(chat1,BorderLayout.PAGE_END);
-			mainGame.add(gameStart,BorderLayout.CENTER);
-			setContentPane(mainGame);
+			setContentPane(gameStart);
 		}else if (e.getSource() == backToChar){
 			setContentPane(createChar);
 		}
-		else if( e.getSource() == quit) {
-			chatClient.stopClient();
-			setContentPane(mainMenu);
-
-		}
 		setVisible(true);
 	}
-
 	
 	//for MouseListener
 	public void mouseClicked(MouseEvent e){}
@@ -128,10 +101,7 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	
 	//main function
 	public static void main(String args[]){
-		if(args.length == 1)
-			new BummRoyale(args[0]);
-		else
-			System.out.println("java BummRoyale <ip address of server>");
+		new BummRoyale();
 	}	
 }
 
