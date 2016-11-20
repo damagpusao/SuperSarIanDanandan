@@ -13,7 +13,9 @@ public class Character {
     private boolean is_died;
     private String name;
 
-    public Character(String name,String[] img_frames) {
+    public Character(String name,String[] img_frames, Weapon weapon) {
+        this.weapon = weapon;
+        weapon.print();
         this.name = name;
         this.is_died = false;
         this.hp = 1000;
@@ -46,6 +48,11 @@ public class Character {
     public String getName() {
         return this.name;
     }
+
+    public Weapon getWeapon() {
+        return this.weapon;
+    }
+
 
     public String toString(){
 		String retval="";

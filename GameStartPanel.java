@@ -39,7 +39,7 @@ public class GameStartPanel extends JPanel implements KeyListener{
 		charPanel.setSize(80,70);
 		charPanel.setOpaque(false);
 
-		weaponG = new WeaponGUI(new Weapon(20));
+		weaponG = new WeaponGUI();
 		weaponG.setSize(80,70);
 		weaponG.setOpaque(false);
 		weaponG.setLocation(xRand+3,517);

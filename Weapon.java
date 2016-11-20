@@ -4,8 +4,9 @@ public class Weapon{
     private int power;
     private int range;
 
-    public Weapon (int power) {
+    public Weapon (int power,int range) {
         this.power = power;
+        this.range = range;
     } 
 
     public int getPower() {
@@ -15,5 +16,9 @@ public class Weapon{
 
     public int getRange() {
         return this.range;
+    }
+
+    public void print() {
+        System.out.println(power + " " + range );
     }
 }

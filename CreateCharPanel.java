@@ -10,6 +10,8 @@ public class CreateCharPanel extends JPanel{
 	JLabel createCharLabel;
 	JButton go, backToMenu;
 	Character character;
+	String[] imgs = null;
+	Weapon weapon = null;
 	
 	
 	public CreateCharPanel(JLabel createCharLabel, JButton go, JButton backToMenu){
@@ -53,7 +55,7 @@ public class CreateCharPanel extends JPanel{
 		JButton char1 = new JButton("char1");
 		char1.addActionListener(al);
 		char1.setForeground(Color.white);
-		char1.setBounds(170,200,200,200);
+		char1.setBounds(170,100,200,200);
 		try {
 			Image img = ImageIO.read(getClass().getResource("images/b_orange-large.png"));
 			char1.setIcon(new ImageIcon(img));
@@ -64,7 +66,7 @@ public class CreateCharPanel extends JPanel{
 		
 		char2.addActionListener(al);
 		char2.setForeground(Color.white);
-		char2.setBounds(380,200,200,200);
+		char2.setBounds(380,100,200,200);
 		try {
 			Image img = ImageIO.read(getClass().getResource("images/b_red-large.png"));
 			char2.setIcon(new ImageIcon(img));
@@ -74,7 +76,7 @@ public class CreateCharPanel extends JPanel{
 		JButton char3 = new JButton("char3");
 		char3.addActionListener(al);
 		char3.setForeground(Color.white);
-		char3.setBounds(590,200,200,200);
+		char3.setBounds(590,100,200,200);
 		try {
 			Image img = ImageIO.read(getClass().getResource("images/g_pink-large.png"));
 			char3.setIcon(new ImageIcon(img));
@@ -85,12 +87,24 @@ public class CreateCharPanel extends JPanel{
 		JButton char4 = new JButton("char4");
 		char4.addActionListener(al);
 		char4.setForeground(Color.white);
-		char4.setBounds(800,200,200,200);
+		char4.setBounds(800,100,200,200);
 		try {
 			Image img = ImageIO.read(getClass().getResource("images/g_green-large.png"));
 			char4.setIcon(new ImageIcon(img));
 		} catch (IOException ex) {
 		}
+
+		JButton weapon1 = new JButton("Long Range");
+		weapon1.addActionListener(al);
+		weapon1.setForeground(Color.white);
+		weapon1.setBounds(380,310,200,50);
+		weapon1.setBackground(Color.RED);
+
+		JButton weapon2 = new JButton("Killer");
+		weapon2.addActionListener(al);
+		weapon2.setForeground(Color.white);
+		weapon2.setBounds(590,310,200,50);
+		weapon2.setBackground(Color.RED);
 
 
 		//"BACK TO MENU" button
@@ -103,6 +117,8 @@ public class CreateCharPanel extends JPanel{
 		this.add(char2);
 		this.add(char3);
 		this.add(char4);
+		this.add(weapon1);
+		this.add(weapon2);
 		this.add(createCharLabel);
 		this.add(nameLabel);		
 		this.add(enterNamePanel);
@@ -113,7 +129,7 @@ public class CreateCharPanel extends JPanel{
 
 	private void charSelect(ActionEvent e) {
 		JButton btn = (JButton)e.getSource();
-		String[] imgs = null;
+		
 		if(btn.getText() == "char1") {
 			System.out.println("char1");
 			imgs = new String[] {"images/b_orange-1.png","images/b_orange-2.png"};
@@ -130,8 +146,21 @@ public class CreateCharPanel extends JPanel{
 			System.out.println("char4");
 			imgs = new String[] {"images/g_green-1.png","images/g_green-2.png"};
 		}
-		if(enterName.getText() != "")
-			this.character = new Character(enterName.getText(), imgs);
+
+		else if(btn.getText() == "Long Range") {
+			System.out.println("Long Range");
+			this.weapon = new Weapon(10,50);
+		}
+
+		else if(btn.getText() == "Killer") {
+			System.out.println("Killer");
+			this.weapon = new Weapon(30,30);
+		}
+
+		if(enterName.getText() != "" && imgs != null && weapon != null){
+			this.character = new Character(enterName.getText(), imgs ,weapon);
+		}
+			
 	}
 
 	public Character getCharacter() {
