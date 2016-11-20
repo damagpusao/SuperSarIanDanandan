@@ -5,6 +5,8 @@ public class Character {
     private int hp;
     private int xPos;
     private int yPos;
+    private double prevAngle; //saves previous attack state
+    private double prevPower;
     private String[] image_frames;
     private Weapon weapon;
     private int team;
@@ -27,13 +29,10 @@ public class Character {
         this.yPos = posY;
     }
 
-    public int attack(double velocity, double angle, int targetX ) {
+    public int attack(double velocity, double angle) {
         double range = (((velocity) * (velocity) ) * Math.sin(angle) )/9.8;
-        int rangeInt = (int)Math.round(range) + this.xPos;
-        if(rangeInt >= targetX - 38 && rangeInt <= targetX + 38) {
-            return this.weapon.getPower();
-        }
-        else return 0;
+        int distance = (int)Math.round(range) + this.xPos;
+        return distance;
     } 
 
     public void equipWeapon(Weapon weapon) {
@@ -48,7 +47,24 @@ public class Character {
         return this.name;
     }
 
+    public String toString(){
+		String retval="";
+		retval+="PLAYER ";
+		retval+=name+" ";
+		retval+=xPos+" ";
+		retval+=yPos+" ";
+        retval+=hp+" ";
+        retval+=weapon.getPower()+" ";
+        retval+=weapon.getRange()+" ";
+		return retval;
+	}	
+
+    public void saveAttackState(double angle, double power) {
+        this.prevAngle = angle;
+        this.prevPower = power;
+    }
+}
+
 
     
 
-} 

@@ -61,10 +61,5 @@ public class ChatGUI extends JPanel{
         myMessage.setText("");
     }
 
-  /*  public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == sendMsgBtn) {
-            this.addMessage(myMessage.getText());
-            myMessage.setText("");
-        } 
-    }*/ 
+
 }

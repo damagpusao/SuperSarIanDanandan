@@ -20,13 +20,15 @@ public class MoveAvatars implements ActionListener
 	private final static String RELEASED = "released ";
 
 	private JComponent component;
+	private JComponent component2;
 	private Timer timer;
 	private Map<String, Point> pressedKeys = new HashMap<String, Point>();
 	private String previousKey = "";
 
-	public MoveAvatars(JComponent component, int delay)
+	public MoveAvatars(JComponent component, JComponent component2, int delay)
 	{
 		this.component = component;
+		this.component2 = component2;
 
 		timer = new Timer(delay, this);
 		timer.setInitialDelay( 0 );
@@ -139,6 +141,7 @@ public class MoveAvatars implements ActionListener
 		//  Move the component
 		CharPanel cpanel = (CharPanel) component;
 		component.setLocation(nextX, nextY);
+		component2.setLocation(nextX+3, nextY+17);
 		cpanel.getCharacter().setPos(nextX, nextY);
 	}
 

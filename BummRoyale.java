@@ -45,14 +45,18 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	String ipaddress;
 	ChooseTeamPanel pickTeam = new ChooseTeamPanel(chooseTeamLabel, A_B, teamA0, teamA1, teamA2, teamA3, teamB0, teamB1, teamB2, teamB3, backToChar, backToMenu3, ready, start);
 
+	BummRoyaleGame game;
 	//Game Start Page
 	JButton quit = new JButton("QUIT");
-	GameStartPanel gameStart = new GameStartPanel(quit);
+	GameStartPanel gameStart;
 
 
 	Character character;
-	public BummRoyale(String ipaddress){
+	public BummRoyale(String ipaddress,BummRoyaleGame game){
 		//sets main frame to menu
+		this.game = game;
+		this.gameStart = new GameStartPanel(quit,game);
+
 		this.ipaddress = ipaddress;
 		setContentPane(mainMenu);
 
@@ -106,12 +110,14 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 			mainGame.setLayout(new BorderLayout());
 			mainGame.add(chat1,BorderLayout.PAGE_END);
 			mainGame.add(gameStart,BorderLayout.CENTER);
+			gameStart.start();
 			setContentPane(mainGame);
 		}else if (e.getSource() == backToChar){
 			setContentPane(createChar);
 		}
 		else if( e.getSource() == quit) {
 			chatClient.stopClient();
+			gameStart.stop();
 			setContentPane(mainMenu);
 
 		}
@@ -129,7 +135,7 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	//main function
 	public static void main(String args[]){
 		if(args.length == 1)
-			new BummRoyale(args[0]);
+			new BummRoyale(args[0],new BummRoyaleGame());
 		else
 			System.out.println("java BummRoyale <ip address of server>");
 	}	

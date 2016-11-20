@@ -1,21 +1,19 @@
 import javax.swing.ImageIcon;
 
-public class Weapon {
+public class Weapon{
     private int power;
-    private ImageIcon img;
-    private Character owner;
+    private int range;
 
-    public Weapon (int power, ImageIcon img) {
+    public Weapon (int power) {
         this.power = power;
-        this.img = img;
-        this.owner = owner; 
     } 
-
-    public void setOwner(Character owner) {
-        this.owner = owner;
-    }
 
     public int getPower() {
         return this.power;
+    }
+
+
+    public int getRange() {
+        return this.range;
     }
 }
