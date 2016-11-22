@@ -66,7 +66,7 @@ public class CharPanel extends JPanel {
 
 		public void flipImage(boolean condition) {
 			 this.isFlip = condition;
-			
+	
 		}
 
 		public void startAnimation() {

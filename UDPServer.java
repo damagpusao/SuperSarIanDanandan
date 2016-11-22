@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -168,16 +167,5 @@ public class UDPServer implements Runnable, Constants{
 			}				  
 		}
 	}	
-	
-/*	
-	public static void main(String args[]){
-		if (args.length != 1){
-			System.out.println("Usage: java -jar circlewars-server <number of players>");
-			System.exit(1);
-		}
-		
-		new GameServer(Integer.parseInt(args[0]));
-	}
-*/
 }
 
