@@ -17,6 +17,8 @@ public class ControlPane extends JPanel implements ActionListener {
     private JButton setAngle = new JButton("Set Angle");
     private JButton setPower = new JButton("Set Power");
 
+    private JButton fireBtn = new JButton("Fire");
+
     private double curAngle = 0.0;
     private double curPower = 0.0;
 
@@ -25,7 +27,7 @@ public class ControlPane extends JPanel implements ActionListener {
         this.game = game;
 
         // row   column
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new GridLayout(0,3));
         //Buttons design
         upAngle.setFont(new Font("Algerian", Font.BOLD,13));
 		upAngle.setForeground(Color.white);
@@ -50,6 +52,10 @@ public class ControlPane extends JPanel implements ActionListener {
         setPower.setFont(new Font("Algerian", Font.BOLD,13));
 		setPower.setForeground(Color.white);
 		setPower.setBackground(Color.RED);
+
+        fireBtn.setFont(new Font("Algerian", Font.BOLD,13));
+		fireBtn.setForeground(Color.white);
+		fireBtn.setBackground(Color.RED);
     
         upAngle.addActionListener(this);
         downAngle.addActionListener(this);
@@ -72,8 +78,12 @@ public class ControlPane extends JPanel implements ActionListener {
         angleField.add(angleTF);
         angleField.add(setAngle);
         
+        
+        fireBtn.addActionListener(this);
+
         this.add(angleField);
         this.add(powerField);
+        this.add(fireBtn);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -98,10 +108,10 @@ public class ControlPane extends JPanel implements ActionListener {
                  game.setAngle(Double.parseDouble(angleTF.getText()));
         
         }
-
-
-        System.out.println(game.getPower());
-        System.out.println(game.getAngle());
+        else if(e.getSource() == fireBtn) { //sets Angle by value in angle text field
+            game.attack();
+        
+        }
 
         powerTF.setText(game.getPower()+"");
         angleTF.setText(game.getAngle()+"");

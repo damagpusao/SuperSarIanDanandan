@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class WeaponGUI extends JPanel{
     private final String src="images/weapon.png";
     private ImageIcon image;
-    private double angle = -90;
+    private double angle;
     private boolean isMoving;
     private AffineTransform transform = new AffineTransform();
 

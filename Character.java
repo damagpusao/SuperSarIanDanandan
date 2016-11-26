@@ -15,7 +15,6 @@ public class Character {
 
     public Character(String name,String[] img_frames, Weapon weapon) {
         this.weapon = weapon;
-        weapon.print();
         this.name = name;
         this.is_died = false;
         this.hp = 1000;
@@ -30,12 +29,6 @@ public class Character {
         this.xPos = posX;
         this.yPos = posY;
     }
-
-    public int attack(double velocity, double angle) {
-        double range = (((velocity) * (velocity) ) * Math.sin(angle) )/9.8;
-        int distance = (int)Math.round(range) + this.xPos;
-        return distance;
-    } 
 
     public void equipWeapon(Weapon weapon) {
         this.weapon = weapon;
@@ -53,6 +46,13 @@ public class Character {
         return this.weapon;
     }
 
+    public int getTeam() {
+        return this.team;
+    }
+
+    public void setTeam(int team) {
+       this.team = team;
+    }
 
     public String toString(){
 		String retval="";
