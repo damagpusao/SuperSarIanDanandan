@@ -70,7 +70,9 @@ public class BummRoyaleGame{
   
   public void attack() {
     System.out.println(player.getName());
-    this.GUI.gameStart.add(new BulletGUI(this,player.getPos()[0], player.getPos()[1], (double)this.curPower, (double)this.curAngle));
+    BulletGUI b = new BulletGUI(this,player.getPos()[0], player.getPos()[1], (double)this.curPower, (double)this.curAngle);
+    this.GUI.gameStart.add(b);
+  
   }
 
   public void getDamagePlayers(double x) {
@@ -80,6 +82,10 @@ public class BummRoyaleGame{
          damagedPlayers = damagedPlayers + players_map.get(key) + ", ";
        } 
     }*/
+  }
+
+  public void sendFinalX(int finalX) {
+    this.GUI.gameStart.send("ATTACK "+player.getName()+" "+finalX+" ");
   }
 
 

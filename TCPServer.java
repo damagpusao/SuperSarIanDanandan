@@ -22,7 +22,7 @@ public class TCPServer extends Thread implements MessageDetector{
 	public void run() {
 		isRunning = true;
 		try{
-			 SERVERSOCK = new ServerSocket(5600);
+			 SERVERSOCK = new ServerSocket(1254);
 			
 			while(isRunning) {
 				 SOCK = SERVERSOCK.accept();
@@ -66,10 +66,5 @@ public class TCPServer extends Thread implements MessageDetector{
 		list.remove(ts);
 	}
 		 
-
-		
-		
-	
-	
 
 }

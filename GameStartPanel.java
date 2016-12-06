@@ -107,7 +107,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 		charPanel.setLocation(xRand,500);
 		charPanel.setSize(80,70);
 		charPanel.setOpaque(false);
-		charPanel.getCharacter().setPos(xRand,500);
+		character.setPos(xRand,500);
 
 		weaponG = new WeaponGUI();
 		weaponG.setSize(80,70);
@@ -162,7 +162,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
         	InetAddress address = InetAddress.getByName(server);
         	DatagramPacket packet = new DatagramPacket(buf, buf.length, address, PORT);
         	socket.send(packet);
-					System.out.println("send to server: "+msg+"\n");
+			System.out.println("send to server: "+msg+"\n");
         }catch(Exception e){}
 		
 	}
@@ -197,8 +197,8 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 				System.out.println("Connecting..");				
 				send("CONNECT "+name);
 			}else if (connected){
-			
-		//offscreen.getGraphics().clearRect(0, 0, 1100, 700);
+				if(serverData!=null) {
+					//offscreen.getGraphics().clearRect(0, 0, 1100, 700);
 				if (serverData.startsWith("PLAYER")){
 					String[] playersInfo = serverData.split(":");
 					for (int i=0;i<playersInfo.length;i++){
@@ -206,6 +206,9 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 						String pname =playerInfo[1];
 						int x = Integer.parseInt(playerInfo[2]);
 						int y = Integer.parseInt(playerInfo[3]);
+						int hp = Integer.parseInt(playerInfo[4]);
+						String look = playerInfo[5];
+						System.out.println("x:" + x + " y:" + y);
 						//draw on the offscreen image
 						//System.out.println("position x&y: "+x+" "+y+"\n");
 						this.getGraphics().fillOval(x, y, 20, 20);
@@ -213,6 +216,8 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 					}
 					//show the changes
 					//this.repaint();
+				}
+		
 				}
 			}			
 		}
@@ -238,7 +243,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 				//send("PLAYER "+name+" "+x+" "+y);
 			}				
 		}
-=======
+
 	class MouseMotionHandler extends MouseMotionAdapter{
 		public void mouseMoved(MouseEvent me){
 			x=me.getX();y=me.getY();
@@ -315,7 +320,11 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 			x = character.xPos; y = character.yPos;
 				if (prevX != x || prevY != y){
 					System.out.println("keyhandler\n");
-					send("PLAYER "+name+" "+x+" "+y);
+					if(character != null) {
+						//send(character.toString());
+						send("PLAYER "+name+" "+x+" "+y+" ");
+					} 
+					
 				}	
 				break;
 		}

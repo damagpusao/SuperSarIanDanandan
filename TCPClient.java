@@ -22,7 +22,7 @@ public class TCPClient extends Thread implements MessageDetector,ActionListener{
 	public void run() {
 		isRunning = true;
 		try{
-		    SOCK = new Socket(serverIP,316);
+		    SOCK = new Socket(serverIP,1254);
 
 		    threadsocket = new ThreadSocket(SOCK,this);
 			threadsocket.start();

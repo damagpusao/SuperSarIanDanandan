@@ -18,5 +18,5 @@ public interface Constants {
 	/**
 	 * Game port
 	 */
-	public static final int PORT=5000;
+	public static final int PORT=62123;
 }

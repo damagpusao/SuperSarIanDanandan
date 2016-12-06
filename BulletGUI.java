@@ -10,6 +10,8 @@ public class BulletGUI extends JPanel implements Runnable {
     private double y;
     private double power;
     private double angle;
+    private int finalX = 9999;
+    private BummRoyaleGame game;
     public BulletGUI(BummRoyaleGame game,int x, int y,double power,double angle ) {
         // create thread for animation
         this.setOpaque(false);
@@ -17,6 +19,7 @@ public class BulletGUI extends JPanel implements Runnable {
         this.x = (double) x;
         this.y = (double) y;
         this.power = power;
+        this.game = game;
         if(angle < 90) {
              this.angle = Math.toRadians(angle + 90);
         }
@@ -42,12 +45,16 @@ public class BulletGUI extends JPanel implements Runnable {
                     this.time = this.time + 0.1;
                 } catch (InterruptedException ex) { }
         }
-
+        game.sendFinalX((int) this.x);
         try {
             Thread.sleep(1500); // before bullet disappears
             this.invalidate();
 
         } catch (InterruptedException ex) { }
+    }
+
+    public int getFinalX(){
+        return this.finalX;
     }
 		
 

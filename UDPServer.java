@@ -158,10 +158,17 @@ public class UDPServer implements Runnable, Constants{
 						  String pname =playerInfo[1];
 						  int x = Integer.parseInt(playerInfo[2].trim());
 						  int y = Integer.parseInt(playerInfo[3].trim());
+						  int hp = Integer.parseInt(playerInfo[4]);
+						  String look = playerInfo[5];
 						  //Get the player from the game state
-						  NetPlayer player=(NetPlayer)game.getPlayers().get(pname);					  
+						  NetPlayer player = null;
+						  player =(NetPlayer)game.getPlayers().get(pname);					  
 						  player.setX(x);
 						  player.setY(y);
+						  player.setHP(hp);
+						  player.setLook(look);
+
+						  
 						  //Update the game state
 						  game.update(pname, player);
 						  //Send to all the updated game state

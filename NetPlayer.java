@@ -20,12 +20,12 @@ public class NetPlayer {
 	/**
 	 * The name of the player
 	 */
-	private String name;
+	private String name,look;
 	
 	/**
 	 * The position of player
 	 */
-	private int x,y;
+	private int x,y,hp;
 
 	/**
 	 * Constructor
@@ -69,6 +69,14 @@ public class NetPlayer {
 	 */
 	public void setX(int x){
 		this.x=x;
+	}
+
+	public void setHP(int hp){
+		this.hp = hp;
+	}
+
+	public void setLook(String look) {
+		this.look = look;
 	}
 	
 	
