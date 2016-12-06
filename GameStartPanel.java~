@@ -82,7 +82,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 		
 		//Adds listeners
 		//this.addKeyListener(new KeyHandler());		
-		//this.addMouseMotionListener(new MouseMotionHandler());
+		this.addMouseMotionListener(new MouseMotionHandler());
 		addKeyListener(this);
 
 		//time to play

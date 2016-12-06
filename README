@@ -1,0 +1,5 @@
+javac *.java -Xlint:unchecked
+sudo java GameServer <max num of players>
+
+for client:
+java BummRoyale <ip address of server> <player name>

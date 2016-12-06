@@ -73,13 +73,12 @@ public class UDPServer implements Runnable, Constants{
 	 * Helper method for broadcasting data to all players
 	 * @param msg
 	 */
-	public boolean broadcast(String msg){
+	public void broadcast(String msg){
 		for(Iterator ite=game.getPlayers().keySet().iterator();ite.hasNext();){
 			String name=(String)ite.next();
 			NetPlayer player=(NetPlayer)game.getPlayers().get(name);
 			send(player,msg);
 		}
-		return true;
 	}
 
 
