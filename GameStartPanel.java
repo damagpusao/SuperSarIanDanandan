@@ -10,6 +10,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 public class GameStartPanel extends JPanel implements KeyListener, Runnable, Constants{	
+
 	Image map = Toolkit.getDefaultToolkit().getImage("images/bg.jpg");
 	JButton quit;
 	Character character;
@@ -65,7 +66,6 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 	 */
 	BufferedImage offscreen;
 
-
 	public GameStartPanel(JButton quit, String server, String name, BummRoyaleGame game) throws Exception{
 		this.setLayout(null);
 		this.quit = quit;
@@ -87,7 +87,6 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 
 		//time to play
 		t.start();
-		//(new HelloThread()).start();		
 	}
 
 	public void init(){
@@ -108,6 +107,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 		charPanel.setLocation(xRand,500);
 		charPanel.setSize(80,70);
 		charPanel.setOpaque(false);
+		charPanel.getCharacter().setPos(xRand,500);
 
 		weaponG = new WeaponGUI();
 		weaponG.setSize(80,70);
@@ -127,6 +127,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 		JTextField powerField = new JTextField();
 		JTextField angle = new  JTextField();
 
+
 		this.add(cp);
 		this.add(quit);
 		this.add(weaponG);
@@ -135,9 +136,6 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 		this.setFocusable(true);
 		this.setFocusTraversalKeysEnabled(false);
 		
-		//this.setBackground(new Color(10,0,40));
-
-
 		Thread angleAnimation = new Thread () {
 			@Override
 			public void run() {
@@ -151,7 +149,8 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 			}
 		};
 		angleAnimation.start();  // start the thread to run animation
-	}
+	}//end of init
+
 
 	/**
 	 * Helper method for sending data to server
@@ -167,32 +166,10 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
         }catch(Exception e){}
 		
 	}
-
-	public class HelloThread extends Thread {
-
-		  public void run() {
-				while (true){
-				//Thread.sleep(1);
-					//System.out.println("wahahha");
-					prevX = x; prevY = y;
-					x = character.xPos; y = character.yPos;
-					//x=me.getX();y=me.getY();
-					if (prevX != x || prevY != y){
-					System.out.println("nooooooooo");
-						send("PLAYER "+name+" "+x+" "+y);
-					}				
-				}
-		  }
-	}
 	
 	/**
 	 * The juicy part!
 	 */
-	
-	public void startSend(){
-		//(new HelloThread()).start();
-	}
-
 	public void run(){
 		while(true){
 			try{
@@ -235,7 +212,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 						this.getGraphics().drawString(pname,x-10,y+30);					
 					}
 					//show the changes
-					this.repaint();
+					//this.repaint();
 				}
 			}			
 		}
@@ -260,6 +237,29 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 			if (prevX != x || prevY != y){
 				//send("PLAYER "+name+" "+x+" "+y);
 			}				
+		}
+=======
+	class MouseMotionHandler extends MouseMotionAdapter{
+		public void mouseMoved(MouseEvent me){
+			x=me.getX();y=me.getY();
+			if (prevX != x || prevY != y){
+				send("PLAYER "+name+" "+x+" "+y);
+			}				
+		}
+	}
+	
+	class KeyHandler extends KeyAdapter{
+		public void keyPressed(KeyEvent ke){
+			prevX=x;prevY=y;
+			switch (ke.getKeyCode()){
+			case KeyEvent.VK_DOWN:y+=yspeed;break;
+			case KeyEvent.VK_UP:y-=yspeed;break;
+			case KeyEvent.VK_LEFT:x-=xspeed;break;
+			case KeyEvent.VK_RIGHT:x+=xspeed;break;
+			}
+			if (prevX != x || prevY != y){
+				send("PLAYER "+name+" "+x+" "+y);
+			}	
 		}
 	}
 

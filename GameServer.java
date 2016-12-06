@@ -10,8 +10,8 @@ public class GameServer {
 			System.exit(1);
 		}
 
-//		TCPServer myServer = new TCPServer(); //start chat server
-//		myServer.start();
+		TCPServer myServer = new TCPServer(); //start chat server
+		myServer.start();
 
 		//args[0] is the max num of players
 		UDPServer myUDPServer = new UDPServer(Integer.parseInt(args[0]));

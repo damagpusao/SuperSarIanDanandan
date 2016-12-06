@@ -18,7 +18,5 @@ public class Weapon{
         return this.range;
     }
 
-    public void print() {
-        System.out.println(power + " " + range );
-    }
+
 }

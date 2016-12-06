@@ -51,10 +51,10 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	GameStartPanel gameStart;
 
 
-	Character character;
-	public BummRoyale(String ipaddress, String playerName, BummRoyaleGame game) throws Exception{
+	//Character character;
+	public BummRoyale(String ipaddress, String playerName) throws Exception{
 		//sets main frame to menu
-		this.game = game;
+		this.game = new BummRoyaleGame(this);
 		this.gameStart = new GameStartPanel(quit, ipaddress, playerName, game);
 		this.ipaddress = ipaddress;
 		setContentPane(mainMenu);
@@ -95,6 +95,7 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 		}else if (e.getSource() == backToMenu1 || e.getSource() == backToMenu2 || e.getSource() == backToMenu3 ){
 			setContentPane(mainMenu);
 		}else if (e.getSource() == go){	
+			System.out.println(createChar.getCharacter().getName());
 			this.chatClient = new TCPClient(createChar.getCharacter().getName(),ipaddress);
 			chatClient.addGUI(chat1);
 			chat1.addClient(chatClient);
@@ -104,9 +105,10 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 			lobbyPanel.add(chat1, BorderLayout.PAGE_END);
 			setContentPane(lobbyPanel);
 		}else if (e.getSource() == start){
-			gameStart.startSend();			
 			JPanel mainGame = new JPanel();
+			createChar.getCharacter().setTeam(1); //temporary
 			gameStart.setCharacter(createChar.getCharacter());
+			game.setCharacter(createChar.getCharacter());
 			mainGame.setLayout(new BorderLayout());
 			mainGame.add(chat1,BorderLayout.PAGE_END);
 			mainGame.add(gameStart,BorderLayout.CENTER);
@@ -134,18 +136,12 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 	
 	//main function
 	public static void main(String args[]) throws Exception{
-/*		if(args.length == 1)
-			new BummRoyale(args[0],new BummRoyaleGame());
-		else
-			System.out.println("java BummRoyale <ip address of server>");
-*/
 		if (args.length != 2){
 			System.out.println("Usage: java BummRoyale <server ip address> <player name>");
 			System.exit(1);
 		}
 
-		new BummRoyale(args[0],args[1], new BummRoyaleGame());
-
+		new BummRoyale(args[0],args[1]);
 	}	
 }
 

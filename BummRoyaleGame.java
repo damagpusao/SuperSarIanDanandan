@@ -2,32 +2,35 @@ import java.util.*;
 import java.awt.event.*;
 
 public class BummRoyaleGame{
-  // private Map players_map = new HashMap();
   private int playerTeamA;
   private int playerTeamB;
   private boolean curTeam; //true = teamA , false = teamB
   private int totalPlayers;
-  private String player;
+  private String curPlayer;
+  private Character player;
   private double curPower = 0;
   private double curAngle = 0;
+  private HashMap<String, Integer> players_map;
   private ArrayList<String> teamA;
   private ArrayList<String> teamB; 
+  private BummRoyale GUI;
 
-
-  public boolean addCharacter(String name, int team){
+  public BummRoyaleGame(BummRoyale gui) {
+    this.GUI = gui;
+  }
+  public boolean addCharacter(String name, int team, int x, int y){
+    int distance = (int) Math.sqrt( (player.getPos()[0] - x ) * (player.getPos()[0] - x ) + (player.getPos()[1] - y ) * (player.getPos()[1] - y )  ); 
+    players_map.put(name, distance);
     if(team == 1 && teamA.size()<(totalPlayers/2)) {
-      teamA.add(name);
+     teamA.add(name);
       return true;
     }
     else if(team == 2 && teamB.size()<(totalPlayers/2)){
       teamB.add(name);
       return true;
     }
-
     else return false;
   }
-
-
 
   /* TO DO : Dana Magpusao */
 
@@ -49,7 +52,7 @@ public class BummRoyaleGame{
   }
 
   public void setTurn(String name) {
-    this.player = name;
+    this.curPlayer = name;
   }
 
   public void setPower(double power) {
@@ -60,23 +63,23 @@ public class BummRoyaleGame{
     this.curAngle = angle;
   }
 
-  public void attack() {
-    //curPlayer.attack(curPower,curAngle);
-    //resets curPower & curAngle 
-    //find match sa list of players <-- TO DO
-    this.curPower = 0;
-    this.curAngle = 0;
+  public void setCharacter(Character character) {
+    this.player = character;
+  }
 
-    if(this.curTeam) {
-      this.playerTeamA = teamA.size() % (this.playerTeamA + 1); 
-      this.curTeam = false;
-      this.setTurn(teamB.get(playerTeamB));
-    }
-    else {
-      this.playerTeamB = teamB.size() % (this.playerTeamB + 1); 
-      this.curTeam = true;
-      this.setTurn(teamB.get(playerTeamA));
-    } 
+  
+  public void attack() {
+    System.out.println(player.getName());
+    this.GUI.gameStart.add(new BulletGUI(this,player.getPos()[0], player.getPos()[1], (double)this.curPower, (double)this.curAngle));
+  }
+
+  public void getDamagePlayers(double x) {
+   /* String damagedPlayers = "dmp: ";
+    for (int key: players_map.keySet()) {
+       if(key > (x - this.player.getWeapon().getRange()) && key < (x + this.player.getWeapon().getRange()) ) {
+         damagedPlayers = damagedPlayers + players_map.get(key) + ", ";
+       } 
+    }*/
   }
 
 
