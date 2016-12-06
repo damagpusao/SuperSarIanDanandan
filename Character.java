@@ -12,13 +12,31 @@ public class Character {
     private int team;
     private boolean is_died;
     private String name;
+    private String look;
 
-    public Character(String name,String[] img_frames, Weapon weapon) {
-        this.weapon = weapon;
-        this.name = name;
+    public Character(String look) {
         this.is_died = false;
         this.hp = 1000;
-        this.image_frames = img_frames;
+        this.look = look;
+
+        if(look == "char1") {
+			System.out.println("char1");
+			image_frames = new String[] {"images/b_orange-1.png","images/b_orange-2.png"};
+		}
+		else if(look == "char2") {
+			System.out.println("char2");
+			 image_frames = new String[] {"images/b_red-1.png","images/b_red-2.png"};
+		}
+		else if(look == "char3") {
+			System.out.println("char3");
+			 image_frames = new String[] {"images/g_pink-1.png","images/g_pink-2.png"};
+		}
+		else if(look== "char4") {
+			System.out.println("char4");
+			image_frames = new String[] {"images/g_green-1.png","images/g_green-2.png"};
+		}
+
+      
     } 
 
     public int[] getPos() {
@@ -54,6 +72,10 @@ public class Character {
        this.team = team;
     }
 
+    public void setName(String name) {
+       this.name = name;
+    }
+
     public String toString(){
 		String retval="";
 		retval+="PLAYER ";
@@ -61,8 +83,7 @@ public class Character {
 		retval+=xPos+" ";
 		retval+=yPos+" ";
         retval+=hp+" ";
-        retval+=weapon.getPower()+" ";
-        retval+=weapon.getRange()+" ";
+        retval+=look+" ";
 		return retval;
 	}	
 

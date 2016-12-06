@@ -129,25 +129,8 @@ public class CreateCharPanel extends JPanel{
 
 	private void charSelect(ActionEvent e) {
 		JButton btn = (JButton)e.getSource();
-		
-		if(btn.getText() == "char1") {
-			System.out.println("char1");
-			imgs = new String[] {"images/b_orange-1.png","images/b_orange-2.png"};
-		}
-		else if(btn.getText() == "char2") {
-			System.out.println("char2");
-			 imgs = new String[] {"images/b_red-1.png","images/b_red-2.png"};
-		}
-		else if(btn.getText() == "char3") {
-			System.out.println("char3");
-			 imgs = new String[] {"images/g_pink-1.png","images/g_pink-2.png"};
-		}
-		else if(btn.getText() == "char4") {
-			System.out.println("char4");
-			imgs = new String[] {"images/g_green-1.png","images/g_green-2.png"};
-		}
-
-		else if(btn.getText() == "Long Range") {
+	   
+	    if(btn.getText() == "Long Range") {
 			System.out.println("Long Range");
 			this.weapon = new Weapon(10,50);
 		}
@@ -157,14 +140,18 @@ public class CreateCharPanel extends JPanel{
 			this.weapon = new Weapon(30,30);
 		}
 
-		if(enterName.getText() != "" && imgs != null && weapon != null){
-			this.character = new Character(enterName.getText(), imgs ,weapon);
+		else if (btn.getText() == "char1" || btn.getText() == "char2" || btn.getText() == "char3" || btn.getText() == "char4"){
+			this.character = new Character(btn.getText());
 		}
 			
 	}
 
 	public Character getCharacter() {
 		return this.character;
+	}
+
+	public String getName(){
+		return enterName.getText();
 	}
 
 
