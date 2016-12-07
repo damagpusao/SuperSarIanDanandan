@@ -40,6 +40,7 @@ public class GameState{
 		for(Iterator ite=players.keySet().iterator();ite.hasNext();){
 			String name=(String)ite.next();
 			Character player=(Character)players.get(name);
+			System.out.println("GameState:" + player);
 			retval+=player.toString()+":";
 		}
 		return retval;

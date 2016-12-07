@@ -170,6 +170,10 @@ public class UDPServer implements Runnable, Constants{
 							 player.setHP(hp);
 							 player.setLook(look);
 						  }
+
+						  else {
+							 player=new Character(pname,packet.getAddress(),packet.getPort());
+						  }
 				  
 						  //Update the game state
 						  game.update(pname, player);

@@ -319,14 +319,14 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 			System.out.println("warwarawaraw");
 			prevX=x; prevY = y;
 			x = character.xPos; y = character.yPos;
-				if (prevX != x || prevY != y){
-					System.out.println("keyhandler\n");
-					if(character != null) {
+			//	if (prevX != x || prevY != y){
+			//		System.out.println("keyhandler\n");
+			//		if(character != null) {
 						send(character.toString());
 						//send("PLAYER "+name+" "+x+" "+y+" ");
-					} 
+			//		} 
 					
-				}	
+			//	}	
 				break;
 		}
 	}
