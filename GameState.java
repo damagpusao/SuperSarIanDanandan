@@ -14,7 +14,7 @@ public class GameState{
 	/**
 	 * This is a map(key-value pair) of <player name,NetPlayer>
 	 */
-	private Map players=new HashMap();
+	private Map<String,Character> players=new HashMap<String,Character>();
 	
 	/**
 	 * Simple constructor

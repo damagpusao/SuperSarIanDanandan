@@ -237,19 +237,22 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 						System.out.println("imageframes: "+image_frames[0]+" "+image_frames[1]);
 						Image a1 = Toolkit.getDefaultToolkit().getImage(image_frames[0]);
 						Image a2 = Toolkit.getDefaultToolkit().getImage(image_frames[1]);
-						if (prev_x < x){
+						if(pname != name) {
+							if (prev_x < x){
 							this.getGraphics().drawImage(a1, x, y, this);	
+							}
+							if (prev_x > x){
+								this.getGraphics().drawImage(a2, x, y, this);	
+							}
+							else{
+								//this.getGraphics().drawImage(a2, x, y, this);	
+							}
+							//Image a = Toolkit.getDefaultToolkit().getImage("images/g_pink-1.png");
+							//this.getGraphics().drawImage(a, x, y, this);
+							//this.getGraphics().fillOval(x, y, 20, 20);
+							this.getGraphics().drawString(pname,x-10,y+30);	
 						}
-						if (prev_x > x){
-							this.getGraphics().drawImage(a2, x, y, this);	
-						}
-						else{
-							//this.getGraphics().drawImage(a2, x, y, this);	
-						}
-						//Image a = Toolkit.getDefaultToolkit().getImage("images/g_pink-1.png");
-						//this.getGraphics().drawImage(a, x, y, this);
-						//this.getGraphics().fillOval(x, y, 20, 20);
-						this.getGraphics().drawString(pname,x-10,y+30);					
+										
 					}
 					//show the changes
 				}
@@ -273,6 +276,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 
 	public void setCharacter(Character c) {
 		this.character = c;
+		c.setName(this.name);
 		if(charPanel != null ) this.remove(charPanel);
 		init();
 	}

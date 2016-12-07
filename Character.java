@@ -95,6 +95,10 @@ public class Character {
         return this.team;
     }
 
+    public String getLook() {
+        return this.look;
+    }
+
     public void setTeam(int team) {
        this.team = team;
     }

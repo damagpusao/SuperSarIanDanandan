@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.awt.event.*;
 public class CreateCharPanel extends JPanel{
 	JLabel nameLabel = new JLabel("Avatar Name:");	
-	JTextArea enterName = new JTextArea("Aura");
+//	JTextArea enterName = new JTextArea("Aura");
 	JPanel enterNamePanel = new JPanel();
 	JLabel createCharLabel;
 	JButton go, backToMenu;
@@ -30,7 +30,7 @@ public class CreateCharPanel extends JPanel{
 		createCharLabel.setFont(new Font("Liberation Serif", Font.BOLD,40));
 		createCharLabel.setForeground(Color.white);
 		createCharLabel.setBounds(440,30,600,60);
-
+/*
 		nameLabel.setFont(new Font("Liberation Serif", Font.BOLD,24));
 		nameLabel.setBounds(520,420,200,50);
 		nameLabel.setForeground(Color.WHITE);
@@ -38,7 +38,7 @@ public class CreateCharPanel extends JPanel{
 		enterName.setBounds(0,0,250,60);
 		enterNamePanel.setBounds(470,480,250,60);
 		enterNamePanel.add(enterName);
-
+*/
 		go.setFont(new Font("Liberation Serif", Font.BOLD,25));
 		go.setForeground(Color.white);
 		go.setBounds(900,600,250,50);
@@ -150,9 +150,6 @@ public class CreateCharPanel extends JPanel{
 		return this.character;
 	}
 
-	public String getName(){
-		return enterName.getText();
-	}
 
 
 }

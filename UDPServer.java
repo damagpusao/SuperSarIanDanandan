@@ -157,7 +157,7 @@ public class UDPServer implements Runnable, Constants{
 						  //Tokenize:
 						  //The format: PLAYER <player name> <x> <y> <hp> <look>
 						  String[] playerInfo = playerData.split(" ");					  
-						  String pname =playerInfo[1];
+						  String pname =playerInfo[1].trim();
 						  int x = Integer.parseInt(playerInfo[2].trim());
 						  int y = Integer.parseInt(playerInfo[3].trim());
 						  int hp = Integer.parseInt(playerInfo[4]);
