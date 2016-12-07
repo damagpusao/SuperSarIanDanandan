@@ -96,7 +96,7 @@ public class BummRoyale extends JFrame implements ActionListener, MouseListener{
 			setContentPane(mainMenu);
 		}else if (e.getSource() == go && createChar.weapon!=null){	
 			createChar.getCharacter().equipWeapon(createChar.weapon);
-			this.chatClient = new TCPClient(gameStart.name,ipaddress);
+			this.chatClient = new TCPClient(name,ipaddress);
 			chatClient.addGUI(chat1);
 			chat1.addClient(chatClient);
 			chatClient.start();
