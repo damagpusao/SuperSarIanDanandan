@@ -25,7 +25,7 @@ public class NetPlayer {
 	/**
 	 * The position of player
 	 */
-	private int x,y,hp;
+	private int x,y,hp, prev_x;
 
 	/**
 	 * Constructor
@@ -95,6 +95,15 @@ public class NetPlayer {
 		this.y=y;		
 	}
 
+
+		public void setPrevX(int prev_x){
+			this.prev_x = prev_x;	
+		}
+		
+		public int getPrevX(){
+			return prev_x;
+		}
+
 	/**
 	 * String representation. used for transfer over the network
 	 */
@@ -106,6 +115,7 @@ public class NetPlayer {
 		retval+=y+" ";
         retval+=hp+" ";
         retval+=look+" ";
+		retval+=prev_x+" ";
 		return retval;
 	}		
 }

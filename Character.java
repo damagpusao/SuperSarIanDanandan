@@ -12,6 +12,7 @@ public class Character {
     private boolean is_died;
     private String name;
     private String look;
+		private int prev_x;
     
     	/**
 	 * The port number of  
@@ -110,6 +111,14 @@ public class Character {
        this.name = name;
     }
 
+		public void setPrevX(int prev_x){
+			this.prev_x = prev_x;	
+		}
+		
+		public int getPrevX(){
+			return prev_x;
+		}
+
     public String toString(){
 		String retval="";
 		retval+="PLAYER ";
@@ -118,6 +127,7 @@ public class Character {
 		retval+=yPos+" ";
         retval+=hp+" ";
         retval+=look+" ";
+		retval+=prev_x+" ";
 		return retval;
 	}	
 }

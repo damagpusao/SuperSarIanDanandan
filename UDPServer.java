@@ -155,25 +155,25 @@ public class UDPServer implements Runnable, Constants{
 					  //Player data was received!
 					  if (playerData.startsWith("PLAYER")){
 						  //Tokenize:
-						  //The format: PLAYER <player name> <x> <y>
+						  //The format: PLAYER <player name> <x> <y> <hp> <look>
 						  String[] playerInfo = playerData.split(" ");					  
 						  String pname =playerInfo[1];
 						  int x = Integer.parseInt(playerInfo[2].trim());
 						  int y = Integer.parseInt(playerInfo[3].trim());
 						  int hp = Integer.parseInt(playerInfo[4]);
 						  String look = playerInfo[5];
+							int prev_x = Integer.parseInt(playerInfo[6]);
 						  //Get the player from the game state
 						  Character player = null;
 						  player =(Character)game.getPlayers().get(pname);					  
-						  if(player != null) {
+							if (player == null){
+								 player=new Character(pname,packet.getAddress(),packet.getPort());
+							}						  
+
 							 player.setPos(x,y);
 							 player.setHP(hp);
 							 player.setLook(look);
-						  }
-
-						  else {
-							 player=new Character(pname,packet.getAddress(),packet.getPort());
-						  }
+							 player.setPrevX(prev_x);
 				  
 						  //Update the game state
 						  game.update(pname, player);

@@ -181,6 +181,8 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 			DatagramPacket packet = new DatagramPacket(buf, buf.length);
 			try{
      			socket.receive(packet);
+					this.repaint();
+
 					//System.out.println("Received: \n");
 			}catch(Exception ioe){
 					//System.out.println("Received failed. \n");
@@ -201,6 +203,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 					//offscreen.getGraphics().clearRect(0, 0, 1100, 700);
 				if (serverData.startsWith("PLAYER")){
 					String[] playersInfo = serverData.split(":");
+   			  String[] image_frames = {"",""};
 					for (int i=0;i<playersInfo.length;i++){
 						String[] playerInfo = playersInfo[i].split(" ");
 						String pname =playerInfo[1];
@@ -209,14 +212,46 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 						int y = Integer.parseInt(playerInfo[3]);
 						int hp = Integer.parseInt(playerInfo[4]);
 						String look = playerInfo[5];
-						System.out.println("x:" + x + " y:" + y);
+						int prev_x = Integer.parseInt(playerInfo[6]);
+						System.out.println("x: " + x + ",y: " + y+",hp: "+hp+",look: "+look+",prev_x: "+prev_x+"\n*******************");
 						//draw on the offscreen image
 						//System.out.println("position x&y: "+x+" "+y+"\n");
-						this.getGraphics().fillOval(x, y, 20, 20);
+						
+					  if(look.equals("char1")) {
+							System.out.println("char1");
+							image_frames = new String[] {"images/b_orange-1.png","images/b_orange-2.png"};
+						}   
+						else if(look.equals("char2")) {
+							System.out.println("char2");
+							 image_frames = new String[] {"images/b_red-1.png","images/b_red-2.png"};
+						}
+						else if(look.equals("char3")) {
+							System.out.println("char3");
+							 image_frames = new String[] {"images/g_pink-1.png","images/g_pink-2.png"};
+						}
+						else if(look.equals("char4")) {
+							System.out.println("char4");
+							image_frames = new String[] {"images/g_green-1.png","images/g_green-2.png"};
+						}else{}
+
+						System.out.println("imageframes: "+image_frames[0]+" "+image_frames[1]);
+						Image a1 = Toolkit.getDefaultToolkit().getImage(image_frames[0]);
+						Image a2 = Toolkit.getDefaultToolkit().getImage(image_frames[1]);
+						if (prev_x < x){
+							this.getGraphics().drawImage(a1, x, y, this);	
+						}
+						if (prev_x > x){
+							this.getGraphics().drawImage(a2, x, y, this);	
+						}
+						else{
+							//this.getGraphics().drawImage(a2, x, y, this);	
+						}
+						//Image a = Toolkit.getDefaultToolkit().getImage("images/g_pink-1.png");
+						//this.getGraphics().drawImage(a, x, y, this);
+						//this.getGraphics().fillOval(x, y, 20, 20);
 						this.getGraphics().drawString(pname,x-10,y+30);					
 					}
 					//show the changes
-					//this.repaint();
 				}
 		
 				}
@@ -235,58 +270,6 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 		//g.fillOval(x, y, 20, 20);
 	}
 
-/*	class MouseMotionHandler extends MouseMotionAdapter{
-		public void mouseMoved(MouseEvent me){
-			prevX = x; prevY = y;
-			x = character.xPos; y = character.yPos;
-			//x=me.getX();y=me.getY();
-			if (prevX != x || prevY != y){
-				//send("PLAYER "+name+" "+x+" "+y);
-			}				
-		}
-
-	class MouseMotionHandler extends MouseMotionAdapter{
-		public void mouseMoved(MouseEvent me){
-			x=me.getX();y=me.getY();
-			if (prevX != x || prevY != y){
-				send("PLAYER "+name+" "+x+" "+y);
-			}				
-		}
-	}
-	
-	class KeyHandler extends KeyAdapter{
-		public void keyPressed(KeyEvent ke){
-			prevX=x;prevY=y;
-			switch (ke.getKeyCode()){
-			case KeyEvent.VK_DOWN:y+=yspeed;break;
-			case KeyEvent.VK_UP:y-=yspeed;break;
-			case KeyEvent.VK_LEFT:x-=xspeed;break;
-			case KeyEvent.VK_RIGHT:x+=xspeed;break;
-			}
-			if (prevX != x || prevY != y){
-				send("PLAYER "+name+" "+x+" "+y);
-			}	
-		}
-	}
-
-	
-	class KeyHandler extends KeyAdapter{
-		public void keyPressed(KeyEvent ke){
-			prevX=x;prevY=y;
-			switch (ke.getKeyCode()){
-			case KeyEvent.VK_DOWN:y+=yspeed;break;
-			case KeyEvent.VK_UP:y-=yspeed;break;
-			case KeyEvent.VK_LEFT:x-=xspeed;break;
-			case KeyEvent.VK_RIGHT:x+=xspeed;break;
-			}
-			x = character.xPos; y = character.yPos;
-			if (prevX != x || prevY != y){
-				System.out.println("keyhandler\n");
-				send("PLAYER "+name+" "+x+" "+y);
-			}	
-		}
-	}
-*/
 
 	public void setCharacter(Character c) {
 		this.character = c;
@@ -319,14 +302,15 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 			System.out.println("warwarawaraw");
 			prevX=x; prevY = y;
 			x = character.xPos; y = character.yPos;
-			//	if (prevX != x || prevY != y){
+				if (prevX != x || prevY != y){
 			//		System.out.println("keyhandler\n");
 			//		if(character != null) {
-						send(character.toString());
+						send(character.toString()+" "+prevX);
 						//send("PLAYER "+name+" "+x+" "+y+" ");
-			//		} 
+					} 
 					
 			//	}	
+
 				break;
 		}
 	}
