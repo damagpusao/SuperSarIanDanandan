@@ -27,7 +27,7 @@ public class GameState{
 	 * @param name
 	 * @param player
 	 */
-	public void update(String name, NetPlayer player){
+	public void update(String name, Character player){
 		players.put(name,player);
 	}
 	
@@ -39,7 +39,7 @@ public class GameState{
 		String retval="";
 		for(Iterator ite=players.keySet().iterator();ite.hasNext();){
 			String name=(String)ite.next();
-			NetPlayer player=(NetPlayer)players.get(name);
+			Character player=(Character)players.get(name);
 			retval+=player.toString()+":";
 		}
 		return retval;

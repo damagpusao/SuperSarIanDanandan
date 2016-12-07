@@ -51,6 +51,8 @@ public class UDPServer implements Runnable, Constants{
 	/**
 	 * Simple constructor
 	 */
+
+
 	public UDPServer(int numPlayers){
 		this.numPlayers = numPlayers;
 		try {
@@ -76,7 +78,7 @@ public class UDPServer implements Runnable, Constants{
 	public boolean broadcast(String msg){
 		for(Iterator ite=game.getPlayers().keySet().iterator();ite.hasNext();){
 			String name=(String)ite.next();
-			NetPlayer player=(NetPlayer)game.getPlayers().get(name);
+			Character player=(Character)game.getPlayers().get(name);
 			send(player,msg);
 		}
 		return true;
@@ -88,7 +90,7 @@ public class UDPServer implements Runnable, Constants{
 	 * @param player
 	 * @param msg
 	 */
-	public void send(NetPlayer player, String msg){
+	public void send(Character player, String msg){
 		System.out.println("msg from "+player+": "+msg+"\n");
 		DatagramPacket packet;	
 		byte buf[] = msg.getBytes();		
@@ -132,7 +134,7 @@ public class UDPServer implements Runnable, Constants{
 						//System.out.println("Game State: Waiting for players...");
 						if (playerData.startsWith("CONNECT")){
 							String tokens[] = playerData.split(" ");
-							NetPlayer player=new NetPlayer(tokens[1],packet.getAddress(),packet.getPort());
+							Character player=new Character(tokens[1],packet.getAddress(),packet.getPort());
 							System.out.println("Player connected: "+tokens[1]);
 							game.update(tokens[1].trim(),player);
 							broadcast("CONNECTED "+tokens[1]);
@@ -161,14 +163,14 @@ public class UDPServer implements Runnable, Constants{
 						  int hp = Integer.parseInt(playerInfo[4]);
 						  String look = playerInfo[5];
 						  //Get the player from the game state
-						  NetPlayer player = null;
-						  player =(NetPlayer)game.getPlayers().get(pname);					  
-						  player.setX(x);
-						  player.setY(y);
-						  player.setHP(hp);
-						  player.setLook(look);
-
-						  
+						  Character player = null;
+						  player =(Character)game.getPlayers().get(pname);					  
+						  if(player != null) {
+							 player.setPos(x,y);
+							 player.setHP(hp);
+							 player.setLook(look);
+						  }
+				  
 						  //Update the game state
 						  game.update(pname, player);
 						  //Send to all the updated game state

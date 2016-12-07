@@ -204,6 +204,7 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 					for (int i=0;i<playersInfo.length;i++){
 						String[] playerInfo = playersInfo[i].split(" ");
 						String pname =playerInfo[1];
+					
 						int x = Integer.parseInt(playerInfo[2]);
 						int y = Integer.parseInt(playerInfo[3]);
 						int hp = Integer.parseInt(playerInfo[4]);
@@ -321,8 +322,8 @@ public class GameStartPanel extends JPanel implements KeyListener, Runnable, Con
 				if (prevX != x || prevY != y){
 					System.out.println("keyhandler\n");
 					if(character != null) {
-						//send(character.toString());
-						send("PLAYER "+name+" "+x+" "+y+" ");
+						send(character.toString());
+						//send("PLAYER "+name+" "+x+" "+y+" ");
 					} 
 					
 				}	

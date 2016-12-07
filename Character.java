@@ -1,28 +1,47 @@
 import java.awt.Point;
+import java.net.InetAddress;
 
 
 public class Character {
     private int hp;
     public int xPos;
     public int yPos;
-    private double prevAngle; //saves previous attack state
-    private double prevPower;
     private String[] image_frames;
     private Weapon weapon;
     private int team;
     private boolean is_died;
     private String name;
     private String look;
+    
+    	/**
+	 * The port number of  
+	 */
+	private int port;
 
+    private InetAddress address;
+
+    //other Players
+    public Character(String name, InetAddress address, int port){
+        this.address = address;
+		this.port = port;
+		this.name = name;
+        this.look = look;
+
+        
+       
+
+	}
+
+    //Player
     public Character(String look) {
         this.is_died = false;
         this.hp = 1000;
         this.look = look;
 
-        if(look == "char1") {
+         if(look == "char1") {
 			System.out.println("char1");
 			image_frames = new String[] {"images/b_orange-1.png","images/b_orange-2.png"};
-		}
+		}   
 		else if(look == "char2") {
 			System.out.println("char2");
 			 image_frames = new String[] {"images/b_red-1.png","images/b_red-2.png"};
@@ -35,8 +54,7 @@ public class Character {
 			System.out.println("char4");
 			image_frames = new String[] {"images/g_green-1.png","images/g_green-2.png"};
 		}
-
-      
+     
     } 
 
     public int[] getPos() {
@@ -64,6 +82,14 @@ public class Character {
         return this.weapon;
     }
 
+    public int getPort(){
+		return port;
+	}
+
+    public InetAddress getAddress(){
+		return address;
+	}
+
     public int getTeam() {
         return this.team;
     }
@@ -71,6 +97,14 @@ public class Character {
     public void setTeam(int team) {
        this.team = team;
     }
+
+	public void setHP(int hp){
+		this.hp = hp;
+	}
+
+	public void setLook(String look) {
+		this.look = look;
+	}
 
     public void setName(String name) {
        this.name = name;
@@ -86,11 +120,6 @@ public class Character {
         retval+=look+" ";
 		return retval;
 	}	
-
-    public void saveAttackState(double angle, double power) {
-        this.prevAngle = angle;
-        this.prevPower = power;
-    }
 }
 
 

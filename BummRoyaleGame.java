@@ -32,7 +32,6 @@ public class BummRoyaleGame{
     else return false;
   }
 
-  /* TO DO : Dana Magpusao */
 
   public void setAngle(KeyEvent e) {
     if(e.getKeyCode() == KeyEvent.VK_UP && curAngle<=180) {

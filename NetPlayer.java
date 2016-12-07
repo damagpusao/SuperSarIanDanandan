@@ -67,17 +67,7 @@ public class NetPlayer {
 	 * Sets the X coordinate of the player
 	 * @param x
 	 */
-	public void setX(int x){
-		this.x=x;
-	}
 
-	public void setHP(int hp){
-		this.hp = hp;
-	}
-
-	public void setLook(String look) {
-		this.look = look;
-	}
 	
 	
 	/**
@@ -113,7 +103,9 @@ public class NetPlayer {
 		retval+="PLAYER ";
 		retval+=name+" ";
 		retval+=x+" ";
-		retval+=y;
+		retval+=y+" ";
+        retval+=hp+" ";
+        retval+=look+" ";
 		return retval;
-	}	
+	}		
 }

@@ -45,7 +45,9 @@ public class BulletGUI extends JPanel implements Runnable {
                     this.time = this.time + 0.1;
                 } catch (InterruptedException ex) { }
         }
+
         game.sendFinalX((int) this.x);
+        
         try {
             Thread.sleep(1500); // before bullet disappears
             this.invalidate();
